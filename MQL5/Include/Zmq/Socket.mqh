@@ -333,3 +333,14 @@ string _ptr2str(int recvPtr) {
   //LocalFree(recvPtr); 
   return mssg; 
 }
+
+string uAnsi2Unicode(int ptrStringMemory)
+{
+  int szString = lstrlenA(ptrStringMemory);
+  uchar ucValue[];
+  ArrayResize(ucValue, szString + 1);
+  RtlMoveMemory(ucValue, ptrStringMemory, szString + 1);
+  string str = CharArrayToString(ucValue);
+  LocalFree(ptrStringMemory);
+  return str;
+}
